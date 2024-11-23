@@ -1,58 +1,730 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</nav>
+    <title>Wonderkind Festival</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Background Div */
+        body {
+            font-family: 'Poppins', sans-serif; /* Menggunakan font Poppins */
+        }
 
-    <!-- Hero Section -->
-  <div class="container-fluid bg-primary text-white py-5 text-center" style="height:100vh">
-    <div class="container">
-      <h1 class="display-4 fw-bold">Welcome to My Website</h1>
-      <p class="lead">A simple, modern, and responsive hero section using Bootstrap 5.</p>
-      <a href="#learn-more" class="btn btn-light btn-lg mt-3">Learn More</a>
-    </div>
-  </div>
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif; /* Menggunakan font Poppins */
+            font-weight: 700; /* Mengatur font menjadi bold */
+        }
+        h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
+        .background-div {
+            width: 100%;
+            height: calc(100vh - 70px); /* Mengisi sisa tinggi halaman setelah navbar */
+            background-image: url('bg web.png'); /* Pastikan path gambar benar */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            padding-top: 70px; /* Menjaga konten tetap terpisah dari navbar */
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0); /* Transparan di awal */
+            transition: background-color 0.3s ease, color 0.3s ease;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 1); /* Putih saat scroll */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan */
+        }
+
+        .navbar .nav-link {
+            color: white; /* Warna teks putih saat navbar transparan */
+            transition: color 0.3s ease;
+        }
+
+        .navbar.scrolled .nav-link {
+            color: black; /* Ubah warna teks menjadi hitam saat digulir */
+        }
+
+        /* Logo Responsiveness */
+        .navbar-brand img {
+            height: 8vh; /* Tinggi logo responsif */
+            object-fit: contain; /* Menjaga proporsi logo */
+        }
+
+        /* Countdown Styles */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .time-section {
+            text-align: center;
+        }
+
+        .time-value {
+            font-weight: bold;
+            font-size: 2.5rem;
+        }
+
+        .time-label {
+            font-size: 1rem;
+        }
+
+        /* About Us */
+        #about {
+            text-align: center; /* Memusatkan teks */
+            display: flex; /* Gunakan flexbox untuk memusatkan */
+            flex-direction: column; /* Pastikan item diatur vertikal */
+            justify-content: center; /* Memusatkan secara vertikal */
+            align-items: center; /* Memusatkan secara horizontal */
+            height: 100vh; /* Pastikan tinggi section sesuai viewport */
+            color: white; /* Pastikan teks terlihat (opsional) */
+            background-color: rgba(0, 0, 0, 0.0); /* Opsional untuk latar belakang */
+            padding-bottom: 150px;
+        }
+
+        #about h1 {
+            margin-bottom: 1rem; /* Tambahkan margin bawah ke heading */
+        }
+
+        #about p {
+            margin: 0;
+            font-size: 1.2rem; /* Ukuran font untuk paragraf */
+        }
+
+        /* Timeline */
+        .timeline {
+            width: 100%;
+            min-height: 100vh; /* Pastikan mengisi tinggi penuh */
+            position: relative;
+            background-color: #001f3f; /* Warna biru dongker */
+            border-radius: 0; /* Sudut membulat dihapus untuk mengisi penuh */
+            padding: 20px; /* Padding untuk konten di dalam timeline */
+            margin: 0; /* Hapus margin untuk mengisi penuh */
+        }
+
+        .timeline h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #1d325f; /* Keep the title color */
+            margin-bottom: 1.5em;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #6a11cb, #2575fc); /* Keep the gradient for the title */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(to bottom, #6a11cb, #2575fc); /* Keep the timeline color */
+            top: 100px; /* Increase the value to lower the line */
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 0;
+            box-shadow: none; /* Remove glowing effect */
+        }
+
+        .timeline-event {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            width: 100%;
+            margin: 1.5em 0;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .timeline-event.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .event-content {
+            background: #1f1f2e; /* Keep the event content background */
+            color: #ffffff; /* Keep the event content text color */
+            padding: 1.5em;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            width: 40%;
+            position: relative;
+            z-index: 2;
+            transition: background-color 0.3s ease;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+
+        .event-content h3 {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 0.3em;
+            color: #ffffff; /* Keep the event title color */
+        }
+
+        .event-content p {
+            font-size: 1em;
+            color: #b0b0b0; /* Keep the event description color */
+        }
+
+        .timeline-event:nth-child(odd) {
+            flex-direction: row-reverse;
+            padding-left: 50px;
+        }
+
+        .timeline-event:nth-child(even) {
+            padding-right: 50px;
+        }
+
+        .event {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* Competition Section */
+        .competition-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .grade-select {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .grade-select button {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            background-color: #fff;
+            color: #d6252c;
+            font-weight: 700;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .grade-select button.active {
+            background-color: #ffd700;
+            color: #000;
+        }
+
+        .grade-select button:hover {
+            background-color: #ffd700;
+            color: #000;
+        }
+
+        .competition-cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            width: 300px;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            background: #2b2b2b;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0,  0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .card h2 {
+            margin: 10px 0;
+            font-size: 1.5rem;
+            color: #f5e5cc;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .card .buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .card .buttons a {
+            padding: 10px;
+            flex: 1;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            text-align: center;
+            border-radius: 5px;
+            background-color: #d6252c;
+            transition: all 0.3s ease;
+        }
+
+        .card .buttons a:hover {
+            background-color: #ffd700;
+            color: #000;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5e5cc;
+        }
+
+        .footer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 40px 20px;
+            background-color: #6b4226;
+            color: #fff;
+            margin-top: 30px
+        }
+
+        .footer-section {
+            flex: 1;
+            margin: 0 10px;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 15px;
+            font-size: 20px;
+            color: #ffd700;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            margin: 5px 0;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            margin-right: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icons a img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 150px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 10px;
+            background-color: #54351e;
+            color: #fff;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 100%) {
+            .footer {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-section {
+                margin-bottom: 20px;
+            }
+
+            .map-container iframe {
+                height: 200px;
+            }
+        }
+    </style>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "p1z97gsmtz");
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="logo.png" alt="Wonderkind Logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Timeline</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Our Event</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#competition-section">Our Competition</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contacts</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="background-div">
+        <div class="container-fluid text-white py-5 text-center">
+            <div class="container">
+                <h1 class="display-4 fw-bold">Anticipate. WONDERK IND FESTIVAL</h1>
+                <h5 class="lead">The Event begins in...</h5>
+
+                <!-- Countdown -->
+                <div class="countdown-container">
+                    <div class="time-section">
+                        <span id="days" class="time-value">00</span>
+                        <span class="time-label">Days</span>
+                    </div>
+                    <div class="time-section">
+                        <span id="hours" class="time-value">00</span>
+                        <span class="time-label">Hours</span>
+                    </div>
+                    <div class="time-section">
+                        <span id="minutes" class="time-value">00</span>
+                        <span class="time-label">Minutes</span>
+                    </div>
+                    <div class="time-section">
+                        <span id="seconds" class="time-value">00</span>
+                        <span class="time-label">Seconds </span>
+                    </div>
+                </div>
+                <a href="https://images.app.goo.gl/C6SDQm6YEn1rv36eA" class="btn btn-light btn-lg mt-3">Learn More</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="background-div">
+        <section id="about">
+            <img src="logo.png" alt="Wonderkind Logo" style="height: 200px; margin-bottom: 10px;">
+            <h1>About Wonderkind Festival</h1>
+            <p>akakakkakakkakakakakakaak</p>
+        </section>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline">
+        <h1>Event Timeline</h1>
+        <div class="timeline-event appear">
+            <div class="event-date">22 Nov 2024</div>
+            <div class="event-content">
+                <h3>Open Registration</h3>
+                <p>Wonder-Competition & Wonderkindness</p>
+            </div>
+        </div>
+        <div class="timeline-event appear">
+            <div class="event-date">15 Dec 2024</div>
+            <div class="event-content">
+                <h3>Wonderkindness</h3>
+                <p>Wonderkind Festival 2025</p>
+            </div>
+        </div>
+        <div class="timeline-event appear">
+            <div class="event-date">02 Feb 2025</div>
+            <div class="event-content">
+                <h3>Open Registration</h3>
+                <p>Wonder-Talk & Wonder-Create</p>
+            </div>
+        </div>
+        <div class="timeline-event appear">
+            <div class="event-date">07 Feb 2025</div>
+            <div class="event-content">
+                <h3>Open Registration</h3>
+                <p>Wonder-Quran</p>
+            </div>
+        </div>
+        <div class="timeline-event appear">
+            <div class="event-date">10 Feb 2025</div>
+            <div class="event-content">
+                <h3>Close Registration</h3>
+                <p>Wonderkind Festival 2025</p>
+            </div>
+        </div>
+        <div class="timeline-event appear">
+            <div class="event-date">15 Feb 2025</div>
+            <div class="event-content">
+                <h3>Technical Meeting</h3>
+                <p>Wonderkind Festival 2025</p>
+            </div>
+        </div>
+        <div class="timeline-event appear">
+            <div class="event-date">16 Feb 2025</div>
+            <div class="event-content">
+                <h3>Grand Opening</h3>
+                <p>Wonderkind Festival 2025</p>
+            </div>
+        </div>
+        <div class="timeline-event appear">
+            <div class="event-date">17 Feb 2025</div>
+            <div class="event-content">
+                <h3>Grand Closing</h3>
+                <p>Wonderoeoe</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Section -->
+     <div class="event">
+        <h1>Our Event</h1>
+     </div>
+     <div id="eventCarousel" class="carousel slide" data-bs-ride="carousel">
+        <!-- Indicators (Optional) -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#eventCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#eventCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        </div>
+    
+        <!-- Carousel Items -->
+        <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+                <div class="d-flex justify-content-center">
+                    <div class="card" style="width: 18rem; margin: 0 0.5rem;">
+                        <img src="WKINDNESS.jpg" class="card-img-top" alt="Menanam">
+                        <div class="card-body">
+                            <h5 class="card-title">Wonderkindness</h5>
+                            <p class="card-text">Clean Up the Beach.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem; margin: 0 0.5rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem; margin: 0 0.5rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <div class="d-flex justify-content-center">
+                    <div class="card" style="width: 18rem; margin: 0 0.5rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem; margin: 0 0.5rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem; margin: 0 0.5rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#eventCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#eventCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    
+
+    <!-- Competition Section -->
+    <div class="competition-section" id="competition-section">
+        <h1>Our Competition</h1>
+        <div class="grade-select">
+            <button class="active">UMUM</button>
+        </div>
+
+        <div class="competition-cards">
+            <div class="card">
+                <h2>ESPORT</h2>
+                <img src="poster esport.png" alt="Lomba woke">
+                <div class="buttons">
+                    <a href="#">Registration</a>
+                    <a href="#">Rulebook</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>LKBB</h2>
+                <img src="poster lkbb.png" alt="Lomba woke">
+                <div class="buttons">
+                    <a href="#">Registration</a>
+                    <a href="#">Rulebook</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>LDBI</h2>
+                <img src="poster futsal.png" alt="Lomba woke">
+                <div class="buttons">
+                    <a href="#">Registration</a>
+                    <a href="#">Rulebook</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="Ini lomba.jpg" alt="Lomba woke">
+                <h3>Lomba 2</h3>
+                <p>apsxksskksksksksksksksksksk</p>
+                <div class="buttons">
+                    <a href="#">Registration</a>
+                    <a href="#">Rulebook</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <!-- Contact Section -->
+        <div class="footer-section contact-info">
+            <h3>Our Contact</h3>
+            <p><strong>Darul Quran Mulia</strong></p>
+            <p>Jl. Raya Puspiptek Jl. Pembangunan Raya, Pabuaran, Kec. Gn. Sindur, Kabupaten Bogor, Jawa Barat 16340</p>
+            <p>📱 +62 821-2859-3050 (Putra)</p>
+            <p>📱 +62 821-2859-3046 (Putri)</p>
+        </div>
+        
+        <!-- Follow Us Section -->
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram"></a>
+                <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/tiktok.png" alt="TikTok"></a>
+                <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/email.png" alt="Email"></a>
+            </div>
+        </div>
+        
+        <!-- Location Section -->
+        <div class="footer-section map-container">
+            <h3>Our Location</h3>
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.674254747607!2d106.77387501478484!3d-6.394483695380782!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e420c26c7c5f3d3%3A0xe120f437c73f0d1!2sDarul%20Quran%20Mulia!5e0!3m2!1sen!2sid!4v1696900118331!5m2!1sen!2sid" 
+                allowfullscreen="">
+            </iframe>
+        </div>
+    </div>
+    
+    <div class="copyright">
+        2024 Wonderkind Festival | Designed by HAIDAR PUSING
+    </div>
+
+    <script>
+        // Countdown Timer
+        const targetDate = new Date('February 14, 2025 00:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeDifference = targetDate - now;
+
+            if (timeDifference < 0) {
+                document.querySelector(".countdown-container").innerHTML = "The celebration has started!";
+                return;
+            }
+
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 *  60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // Intersection Observer for timeline animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
+                }
+            });
+        });
+        document.querySelectorAll('.timeline-event').forEach(event => {
+            observer.observe(event);
+        });
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Scroll event to change navbar background
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
